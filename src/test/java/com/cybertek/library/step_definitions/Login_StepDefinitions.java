@@ -4,6 +4,7 @@ import com.cybertek.library.pages.DashboardPage;
 import com.cybertek.library.pages.LoginPage;
 import com.cybertek.library.utilities.ConfigurationReader;
 import com.cybertek.library.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Login_StepDefinitions {
     LoginPage loginPage = new LoginPage();
     DashboardPage dashboardPage = new DashboardPage();
-
+    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
     @Given("I am the login page")
     public void i_am_the_login_page() {
         String url = ConfigurationReader.getProperty("qa2_url");
@@ -37,6 +38,7 @@ public class Login_StepDefinitions {
         String actual=Driver.getDriver().getCurrentUrl();
         //System.out.println("actual = " + actual);
         Assert.assertTrue(actual.contains(expected));
+        Driver.closeDriver();
     }
 
     @When("I login as a student")
@@ -48,11 +50,41 @@ public class Login_StepDefinitions {
 
     @Then("books  should be displayed")
     public void booksShouldBeDisplayed() {
-        String expected="book";
-        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+        String expected="books";
+
         wait.until(ExpectedConditions.urlContains(expected));
 
         String actual=Driver.getDriver().getCurrentUrl();
         Assert.assertTrue(actual.contains(expected));
+
+
+    }
+
+    @When("I enter username {string}")
+    public void iEnterUsername(String username) {
+        loginPage.emailAddress.sendKeys(username);
+
+
+    }
+
+    @And("I enter password {string}")
+    public void iEnterPasswordNpAxVIh(String password) {
+        loginPage.password.sendKeys(password);
+    }
+
+    @And("click the sign in button")
+    public void clickTheSignInButton() {
+        loginPage.signInButton.click();
+    }
+
+    @And("there should be {string} users")
+    public void thereShouldBeUsers(String users ) {
+
+
+        wait.until(ExpectedConditions.visibilityOf(dashboardPage.numberUser));
+
+
+        Assert.assertTrue(dashboardPage.numberUser.getText().equals(users));
+
     }
 }

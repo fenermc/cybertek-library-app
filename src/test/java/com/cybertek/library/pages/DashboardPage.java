@@ -12,5 +12,7 @@ public class DashboardPage {
     }
     @FindBy(xpath = "//span[.='Dashboard']")
     public WebElement dashboard;
+    @FindBy(id="user_count")
+    public WebElement numberUser;
 
 }
