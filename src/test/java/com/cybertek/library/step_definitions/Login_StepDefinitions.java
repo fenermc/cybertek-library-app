@@ -77,14 +77,16 @@ public class Login_StepDefinitions {
         loginPage.signInButton.click();
     }
 
-    @And("there should be {string} users")
-    public void thereShouldBeUsers(String users ) {
+    @And("there should be {int} users")
+    public void thereShouldBeUsers(int userCount ) {
+        String expected=String.valueOf(userCount);
 
 
-        wait.until(ExpectedConditions.visibilityOf(dashboardPage.numberUser));
+        wait.until(ExpectedConditions.visibilityOf(dashboardPage.userCount));
 
 
-        Assert.assertTrue(dashboardPage.numberUser.getText().equals(users));
+        Assert.assertTrue("actual number is not the same",dashboardPage.userCount.getText().equals(expected));
 
     }
+
 }

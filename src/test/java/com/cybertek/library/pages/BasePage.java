@@ -5,14 +5,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class DashboardPage {
-    public DashboardPage(){
+public class BasePage {
+    public BasePage(){
         PageFactory.initElements(Driver.getDriver(), this);
 
     }
-    @FindBy(xpath = "//span[.='Dashboard']")
-    public WebElement dashboard;
-    @FindBy(id="user_count")
-    public WebElement userCount;
+    @FindBy(linkText = "Users")
+    public WebElement usersPageLink;
+
+    @FindBy(linkText = "Books")
+    public WebElement booksPageLink;
+
+    @FindBy(linkText = "Dashboard")
+    public WebElement dashboardPageLink;
+
+
+
+
 
 }
