@@ -17,3 +17,9 @@ Feature: login with parameters
     And click the sign in button
     Then books  should be displayed
 
+@wip
+  Scenario: Login as librarian same line
+    Given I am the login page
+    When I login using "librarian12@library" and "AOYKYTMJ"
+    Then dashboard should be displayed
+      #number can be whatever you have there

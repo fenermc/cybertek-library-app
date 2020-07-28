@@ -89,4 +89,20 @@ public class Login_StepDefinitions {
 
     }
 
+    @When("I login using {string} and {string}")
+    public void iLoginUsingAnd(String username, String password) {
+        loginPage.emailAddress.sendKeys(username);
+        loginPage.password.sendKeys(password);
+        loginPage.signInButton.click();
+
+
+
+
+
+    }
+
+    @Then("account holder name should be {string}")
+    public void accountHolderNameShouldBe(String expectedUserName) {
+
+    }
 }
